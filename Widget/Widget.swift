@@ -40,23 +40,19 @@ struct Provider: TimelineProvider {
 func GetLeftTime (_: Void) -> (DateComponents) {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy-MM-dd"
-    let currentTime = dateFormatter.date(from:"2018-03-01")! // now
-    let endTime = dateFormatter.date(from:"2018-05-15")! //today 7:00
+    let currentTime = Date() // now
+    let endTime = DateComponents(calendar: Calendar.current, hour: 7, minute: 0, second: 0, nanosecond: 0)
 
+    //let calendar = Calendar.current
+    //let gap = endTime.timeIntervalSince(currentTime)
     
-
-    let calendar = Calendar.current
-    let gap = calendar.dateComponents([.year,.month,.day,.hour, .minute, .second], from: currentTime, to: endTime)
-
     return gap
-    /*
-    if case let (y?, m?, d?, h?) = (dateGap.year, dateGap.month, dateGap.day, dateGap.hour)
-    {
-      print("\(y)년 \(m)개월 \(d)일 \(h)시간 후")
-    }*/
+    
 }
 
 struct SimpleEntry: TimelineEntry {
+    var date: Date
+    
     let TimeToGoHome : Date
     let CurrentTime: Date
 }
